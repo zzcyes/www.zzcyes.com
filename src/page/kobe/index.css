@@ -1,0 +1,455 @@
+* {
+    padding: 0;
+    margin: 0;
+  }
+  
+  body {
+    background: #e0e0e0;
+    font-family: "Helvetica Neue", Helvetica, "Lucida Grande", Arial,
+      "Hiragino Sans GB", 微软雅黑, "WenQuanYi Micro Hei", STHeiti, SimSun,
+      sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  ul,
+  li {
+    list-style: none;
+  }
+  
+  .none-user-select {
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .index {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../assets/image/kobe.jpg);
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center 0;
+  }
+  
+  nav {
+    display: none;
+    position: absolute;
+    top: 0;
+  }
+  
+  footer {
+    position: absolute;
+    bottom: 10px;
+  }
+  
+  .header-nav {
+    width: 60vw;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .header-nav {
+      width: 80vw;
+      height: 60px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  @media screen and (max-width: 420px) {
+    .header-nav {
+      width: 100vw;
+      height: 60px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  .header-nav > li {
+    cursor: pointer;
+  }
+  
+  .header-nav > li {
+    height: 60px;
+    line-height: 60px;
+    flex: 1;
+    z-index: 1;
+    background-color: #444353;
+  
+    border-right: 1px solid #2d2d37;
+    transition: all 0.5s ease-out;
+  }
+  
+  .header-nav > li:last-child {
+    flex: 1.5;
+  }
+  
+  .header-nav > li > a {
+    position: relative;
+    color: #fefefe;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .header-nav > li.is-active > a::after,
+  .header-nav > li > a:hover::after {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    content: "";
+    width: 100%;
+    height: 5px;
+    background-color: #00c8e6;
+  }
+  
+  .header-nav::before {
+    position: relative;
+    right: -7.5%;
+    display: block;
+    content: "";
+    height: 100%;
+    width: 20%;
+    background-color: #2d2d37;
+    border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transform: skew(30deg);
+  }
+  
+  .header-nav::after {
+    position: relative;
+    left: -7.5%;
+    display: block;
+    content: "";
+    height: 100%;
+    width: 20%;
+    background-color: #2d2d37;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transform: skew(30deg);
+  }
+  
+  @media screen and (max-width: 420px) {
+    .header-nav::before {
+      display: none;
+    }
+  
+    .header-nav::after {
+      display: none;
+    }
+  }
+  
+  .announcement {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .announcement > section > .random {
+    color: white;
+    font-size: 16px;
+  }
+  
+  #mamba {
+    color: white;
+  }
+  
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+  }
+  
+  .footer-nav > li {
+    word-break: break-all;
+  }
+  
+  .footer-nav .copyright {
+    color: #34538b;
+    text-decoration: none;
+  }
+  
+  #audio {
+    display: none;
+  }
+  .music-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #music,
+  #ball,
+  #plane {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 2px 2px 1px balck;
+    background-size: cover;
+    background-size: 25% 25%;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #music {
+    background-image: url(../../assets/image/kobe-1.jpg);
+  }
+  
+  #ball {
+    background-image: url(../../assets/image/ball.png);
+  }
+  
+  /* #ball::after{
+    position: absolute;
+    left: 30px;
+    top: -50%;
+    content:"👇"
+  } */
+  
+  #plane {
+    background-image: url(../../assets/image/plane.png);
+  }
+  
+  .playing:hover::after {
+    position: absolute;
+    content: "";
+    width: 35px;
+    height: 10px;
+    transform: translateY(-100%);
+    background: rgba(142, 142, 142, 0.3);
+  }
+  
+  .playing:hover::before {
+    position: absolute;
+    content: "";
+    width: 35px;
+    height: 10px;
+    transform: translateY(100%);
+    background: rgba(142, 142, 142, 0.3);
+  }
+  
+  .top-left {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+  }
+  
+  .top-right {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+  }
+  
+  .bottom-left {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+  }
+  
+  .rotate {
+    -webkit-animation: rotating 5s linear infinite;
+    -moz-animation: rotating 5s linear infinite;
+    -o-animation: rotating 5s linear infinite;
+    animation: rotating 5s linear infinite;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .show {
+    opacity: 0;
+  }
+  
+  .mask-index {
+    opacity: 0.2;
+  }
+  
+  @-webkit-keyframes rotating {
+    from {
+      -webkit-transform: rotate(0);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes rotating {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @-moz-keyframes rotating {
+    from {
+      -moz-transform: rotate(0);
+    }
+    to {
+      -moz-transform: rotate(360deg);
+    }
+  }
+  
+  .ball-rotate {
+    animation: bounce 4s cubic-bezier(0.1, 0.25, 1, 0.25) forwards;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes bounce {
+    10% {
+      transform: translateY(-40px);
+    }
+    15% {
+      transform: translateY(-30px);
+    }
+    20% {
+      transform: translateY(-15px);
+    }
+    25% {
+      transform: translateY(-0px);
+    }
+    30% {
+      transform: translateY(-38px);
+    }
+    35% {
+      transform: translateY(-25px);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    45% {
+      transform: translateY(-4px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    55% {
+      transform: translateY(-40px);
+    }
+    60% {
+      transform: translateY(-30px);
+    }
+    65% {
+      transform: translateY(-15px);
+    }
+    70% {
+      transform: translateY(-0px);
+    }
+    75% {
+      transform: translateY(-38px);
+    }
+    80% {
+      transform: translateY(-25px);
+    }
+    85% {
+      transform: translateY(-10px);
+    }
+    90% {
+      transform: translateY(-4px);
+    }
+    95% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(-8px);
+    }
+  }
+  
+
+  .cute-barrage {
+    width: 100%;
+    height: 50%; /*确定弹幕长度*/
+    position: absolute;
+    top: 50%; /*确定弹幕高度*/
+    transform: translatey(-50%);
+    left: 0;
+    overflow-x: hidden; /*横向超出部分隐藏*/
+  }
+
+  .cute-barrage .barrage-div {
+    position: absolute;
+    top: 0;
+    right: -100%; /*保证一开始在界面外侧，从右向左就是right，从左向右就是left*/
+    height: 0.6rem;
+    border-radius: 2rem;
+    white-space: nowrap; /*确保内容在一行显示，不然移动到最后会折行*/
+  }
+
+  .cute-barrage .barrage-div img {
+    width: 0.5rem;
+    height: 0.5rem;
+    vertical-align: middle;
+    padding-left: 0.05rem;
+    border-radius: 50%;
+  }
+
+  .cute-barrage .barrage-div span {
+    font-size: 1rem;
+    padding: 0 0.1rem;
+    height: 0.6rem;
+    color: white;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .container{
+    width: 95%;
+    padding:10px;
+    border-radius: 5px;
+    overflow: hidden;
+ }
+
+ .stage {
+  position: relative;
+  height: 80vh;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/*设置关键帧*/
+@keyframes move {
+  0% {
+    right: 0
+  }
+  100% {
+    left: 0
+  }
+}

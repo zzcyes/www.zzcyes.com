@@ -1,0 +1,602 @@
+/* 公共样式 */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #e0e0e0;
+    font-family: 'Helvetica Neue', Helvetica, 'Lucida Grande', Arial, 'Hiragino Sans GB', 微软雅黑, 'WenQuanYi Micro Hei', STHeiti, SimSun, sans-serif;
+    min-width: 1080px;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+dt,
+dd,
+p {
+    cursor: default;
+}
+
+aside {
+    position: fixed;
+    right: 0;
+    top: 20%;
+    z-index: 2;
+}
+
+.bg-red{
+	margin-left:5px;
+	background-color:#FF0033;
+	border:2px solid white;
+	border-right-width:0;
+	
+}
+.bg-orange{
+	margin-left:5px;
+	background-color:orange;
+	border:2px solid white;
+	border-right-width:0;
+}
+.bg-yellow{
+	margin-left:5px;
+	background-color:#B8860B;
+	border:2px solid white;
+	border-right-width:0;
+}
+.bg-green{
+	margin-left:5px;
+	background-color:#00FA9A;
+	border:2px solid white;
+	border-right-width:0;
+}
+.pdf{
+	
+}
+.bg-blue{
+	margin-left:5px;
+	background-color:#1E90FF;
+	border:2px solid white;
+	border-right-width:0;
+}
+.bg-purple{
+	margin-left:5px;
+	background-color:#BF3EFF;
+	border:2px solid white;
+	border-right-width:0;
+}
+.bg-gblue{
+	margin-left:5px;
+	background-color:#00bfa5;
+	border:2px solid white;
+}
+.bg-gray{
+	margin-left:5px;
+	background-color:gray;
+	border:2px solid white;
+}
+.L2 li{
+	
+	display:none;
+}
+.L1 li:hover ul.L2 li{
+	display:block;
+	
+}
+aside li {
+    margin-bottom: 10px;
+    border-radius: 10px 0 0 10px;
+    background: #1E90FF;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+aside a {
+    color: #fff;
+    display: inline-block;
+    width: 80px;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 10px;
+}
+
+.container {
+    position: relative;
+    margin: 10px auto;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+    width: 1060px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.sidebar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    padding: 15px 15px 10000px;
+    background: #1E90FF;
+    color: #fff;
+    line-height: 1.5;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: -10000px;
+}
+
+.sidebar a {
+    color: #fff;
+}
+
+.title {
+    margin: 25px 0 20px;
+    text-align: center;
+}
+
+.title img {
+    display: block;
+    margin: 0 auto 15px;
+    width: 160px;
+	height:160px;
+	border-radius:50%;
+	
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 14px;
+}
+
+.side-info li {
+    padding-top: 20px;
+}
+
+.side-info dt {
+    font-size: 18px;
+    color: #0000CD;
+    line-height: 40px;
+}
+
+.side-info dd {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.someRight dd {
+    margin-left: 25px;
+}
+
+.skill {
+    position: relative;
+}
+
+.skill-name {
+    width: 100px;
+    font-size: 14px;
+    display: inline-block;
+    position: relative;
+    left: 25px;
+    top: -3px;
+}
+
+.skill-bar-wrap {
+    height: 17px;
+    width: 150px;
+    background: #00796b;
+    display: inline-block;
+    border-radius: 20px;
+}
+
+.skill-bar {
+    height: 17px;
+    background: #fff;
+    border-radius: 20px 0 0 20px;
+}
+
+.note {
+    text-indent: 2em;
+    margin-top: 90px;
+    color: #f0f2f1;
+    font-size: 15px;
+}
+
+.main {
+    position: relative;
+    left: 300px;
+    width: 720px;
+    padding: 15px 20px 10000px;
+    background: #f0f2f1;
+    margin-bottom: -10000px;
+}
+
+.main a {
+    color: #6495ED;
+}
+
+.main-info > li {
+    padding-top: 20px;
+}
+
+.main-info dt {
+    font-size: 24px;
+    color: #0000CD;
+    line-height: 30px;
+    border-bottom: 1px solid #0000CD;
+    margin: 0 0 15px -5px;
+}
+
+.main-info dd {
+    font-size: 15px;
+    line-height: 27px;
+    color: #616161;
+}
+
+.main-info span {
+    color: #000;
+    font-size: 16px;
+}
+
+h3 {
+    font-size: 19px;
+    color: #191970;
+    margin: 0 0 15px 5px;
+}
+
+h4 {
+    line-height: 30px;
+    font-size: 18px;
+    color: #000;
+    position: relative;
+    bottom: 3px;
+}
+
+h5 {
+    clear: both;
+    font-size: 16px;
+    color: #000;
+    line-height: 25px;
+}
+
+.fa {
+    margin-right: 2px;
+}
+
+h4 a,
+h5 a {
+    font-size: 12px;
+    border: 1px solid #6495ED;
+    padding: 1px 3px;
+    border-radius: 5px;
+    margin-left: 7px;
+}
+
+.circle {
+    height: 14px;
+    width: 14px;
+    border-radius: 100%;
+    background: #0000CD;
+    float: left;
+    position: absolute;
+    left: -28px;
+    top: 5px;
+}
+
+.exp {
+    border-left: 2px solid #0000CE;
+    margin-left: 15px;
+}
+
+.exp p {
+    font-size: 15px;
+    color: #616161;
+    line-height: 22px;
+    margin-bottom: 3px;
+}
+
+.exp > li {
+    position: relative;
+    top: -5px;
+    margin: 0 0 20px 20px;
+}
+
+.exp img {
+    width: 200px;
+}
+
+.exp ul > li {
+    margin: 0 0 12px 0;
+}
+
+.efe .task4img img {
+    height: 97px;
+    width: inherit;
+}
+
+footer {
+    margin: 30px 0 20px;
+}
+
+footer p {
+    text-align: center;
+    color: #616161;
+    font-size: 14px;
+}
+
+footer a {
+    color: #616161;
+}
+
+.throb {
+    -webkit-animation: throb 1.33s ease-in-out infinite;
+    animation: throb 1.33s ease-in-out infinite;
+}
+
+@-webkit-keyframes throb {
+    0% {
+        -webkit-transform: scale(1);
+    }
+
+    50% {
+        -webkit-transform: scale(0.8);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes throb {
+    0% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+}
+
+    50% {
+        transform: scale(0.8);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* 字体 */
+@font-face {
+    font-family: 'fontello';
+    src: url('../../assets/font/fontello.eot?32003456');
+    src: url('../../assets/font/fontello.eot?32003456#iefix') format('embedded-opentype'),
+         url('../../assets/font/fontello.woff?32003456') format('woff'),
+         url('../../assets/font/fontello.ttf?32003456') format('truetype'),
+         url('../../assets/font/fontello.svg?32003456#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+  /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+  /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+  /*
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    @font-face {
+      font-family: 'fontello';
+      src: url('../font/fontello.svg?32003456#fontello') format('svg');
+    }
+  }
+  */
+   
+   [class^="icon-"]:before, [class*=" icon-"]:before {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+   
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+   
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+   
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+   
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    margin-left: .2em;
+   
+    /* you can be more comfortable with increased icons size */
+    /* font-size: 120%; */
+   
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+   
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  }
+   
+  .icon-wechat:before { content: '\e800'; } /* '' */
+  .icon-qq:before { content: '\e801'; } /* '' */
+  .icon-bookmark:before { content: '\e802'; } /* '' */
+  .icon-heart:before { content: '\e803'; } /* '' */
+  .icon-mail-alt:before { content: '\e804'; } /* '' */
+  .icon-link:before { content: '\e805'; } /* '' */
+  .icon-phone-1:before { content: '\e806'; } /* '' */
+
+  
+
+/* 简历 */
+
+.strong{
+    font-weight: 600;
+}
+
+.weak{
+    color:#616161;
+    font-weight: 400;
+}
+
+.qr-code-wrapper{
+    position: fixed;
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 270px;
+    height: 200px;
+    text-align: center;
+    /* margin: 25px 0 20px; */
+    /* text-align: center; */
+}
+
+.qr-code-img{
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
+
+ul.basic-info{
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 25px;
+}
+
+ul > li.info-box{
+    width: 50%;
+    font-size: 15px;
+    line-height: 27px;
+    color: #616161;
+}
+
+ul > li.info-box span{
+    display: inline-block;
+    /* min-width:4em; */
+    text-align: left;
+}
+
+.photo-head{
+    cursor: pointer;
+    display: block;
+    margin: 0 auto 15px;
+    width: 160px;
+	height:160px;
+	border-radius:50%;
+}
+
+img.photo-work,
+.photo-work{
+    width:300px;
+    height: 150px;
+    background-size: cover;
+    background-position: 100%;
+    border: 1px solid black;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
+
+img.photo-phone-work,
+.photo-phone-work{
+    width:150px;
+    height: 300px;
+    background-size: cover;
+    background-position: 50%;
+    border: 0.5px solid gray;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    background-repeat: no-repeat;
+}
+img.photo-phone-work-test,
+.photo-phone-work-test{
+    display: inline-block;
+    width: 150px;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    border: 0.5px solid gray;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    
+}
+
+/* .photo-phone-work-test-1{
+    background-image: url("../../assets/image/test-1.png");
+}
+.photo-phone-work-test-2{
+    background-image: url("../../assets/image/test-2.png");
+}
+.photo-phone-work-test-3{
+    background-image: url("../../assets/image/test-3.png");
+}
+.photo-phone-work-test-4{
+  
+    background-image: url("../../assets/image/test-4.png");
+}
+.photo-phone-work-test-5{
+    background-image: url("../../assets/image/test-5.png");
+}
+.photo-phone-work-test-6{
+    background-image: url("../../assets/image/test-6.png");
+}
+.photo-phone-work-test-7{
+    background-image: url("../../assets/image/test-7.png");
+}
+.photo-phone-work-test-8{
+    background-image: url("../../assets/image/test-8.png");
+} */
+
+/* .photo-chain-work{
+    background-image: url("../../assets/image/chain-1.jpg");
+}
+
+.photo-baas-work-1{
+    display: inline-block;
+    background-image: url("../../assets/image/bass-1.png");
+   
+} */
+
+.photo-baas-work-2{
+    /* display: inline-block; */
+    margin-left: 5px;
+    /* background-image: url("../../assets/image/bass-2.png"); */
+}
+
+
+
+
+
+  
