@@ -67,17 +67,18 @@ $(function(){
 
 // 切换主题
 $(document).ready(function() {
-  $('body').css('visibility','visible');
-
-    $('.photo-head').on('click',function(){
-        if(Array.from($('#main-page')[0].classList).includes('gold-theme')){
-            $('#banner')[0].classList.add('hidden')
-            $('#main-page')[0].classList.remove('gold-theme')
-        }else{
-            $('#banner')[0].classList.remove('hidden')
-            $('#main-page')[0].classList.add('gold-theme')
-        }
-    })
+  $('#home-wrapper').css('display','flex');
+  $('#home-wrapper').addClass('home-wrapper');
+  $('.loading').css('display','none');
+  $('.photo-head').on('click',function(){
+    if(Array.from($('#main-page')[0].classList).includes('gold-theme')){
+        $('#banner')[0].classList.add('hidden')
+        $('#main-page')[0].classList.remove('gold-theme')
+    }else{
+        $('#banner')[0].classList.remove('hidden')
+        $('#main-page')[0].classList.add('gold-theme')
+    }
+  })
 })
 
 var os = function() {
@@ -100,4 +101,4 @@ var os = function() {
 
 if(os.isAndroid || os.isPhone){
     $('.social-share-element.social-luck').css('display','none')
-  }
+}
