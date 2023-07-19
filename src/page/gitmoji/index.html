@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitEmoji | 钟子晨的博客</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <link rel="icon" href="assets/image/favicon.ico" type="image/x-icon">	
+    <style>
+        code[class*="language-"],
+        pre[class*="language-"] {
+            color: #333;
+            background: none;
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            text-align: left;
+            white-space: pre;
+            word-spacing: normal;
+            word-break: normal;
+            word-wrap: normal;
+            line-height: 1.4;
+            -moz-tab-size: 8;
+            -o-tab-size: 8;
+            tab-size: 8;
+            -webkit-hyphens: none;
+            -moz-hyphens: none;
+            -ms-hyphens: none;
+            hyphens: none;
+        }
+        /* Code blocks */
+        
+        pre[class*="language-"] {
+            padding: .8em;
+            overflow: auto;
+            /* border: 1px solid #ddd; */
+            border-radius: 3px;
+            /* background: #fff; */
+            background: #f5f5f5;
+        }
+        /* Inline code */
+        
+         :not(pre)>code[class*="language-"] {
+            padding: .1em;
+            border-radius: .3em;
+            white-space: normal;
+            background: #f5f5f5;
+        }
+        
+        .token.comment,
+        .token.blockquote {
+            color: #969896;
+        }
+        
+        .token.cdata {
+            color: #183691;
+        }
+        
+        .token.doctype,
+        .token.punctuation,
+        .token.variable,
+        .token.macro.property {
+            color: #333;
+        }
+        
+        .token.operator,
+        .token.important,
+        .token.keyword,
+        .token.rule,
+        .token.builtin {
+            color: #a71d5d;
+        }
+        
+        .token.string,
+        .token.url,
+        .token.regex,
+        .token.attr-value {
+            color: #183691;
+        }
+        
+        .token.property,
+        .token.number,
+        .token.boolean,
+        .token.entity,
+        .token.atrule,
+        .token.constant,
+        .token.symbol,
+        .token.command,
+        .token.code {
+            color: #0086b3;
+        }
+        
+        .token.tag,
+        .token.selector,
+        .token.prolog {
+            color: #63a35c;
+        }
+        
+        .token.function,
+        .token.namespace,
+        .token.pseudo-element,
+        .token.class,
+        .token.class-name,
+        .token.pseudo-class,
+        .token.id,
+        .token.url-reference .token.variable,
+        .token.attr-name {
+            color: #795da3;
+        }
+        
+        .token.entity {
+            cursor: help;
+        }
+        
+        .token.title,
+        .token.title .token.punctuation {
+            font-weight: bold;
+            color: #1d3e81;
+        }
+        
+        .token.list {
+            color: #ed6a43;
+        }
+        
+        .token.inserted {
+            background-color: #eaffea;
+            color: #55a532;
+        }
+        
+        .token.deleted {
+            background-color: #ffecec;
+            color: #bd2c00;
+        }
+        
+        .token.bold {
+            font-weight: bold;
+        }
+        
+        .token.italic {
+            font-style: italic;
+        }
+        /* JSON */
+        
+        .language-json .token.property {
+            color: #183691;
+        }
+        
+        .language-markup .token.tag .token.punctuation {
+            color: #333;
+        }
+        /* CSS */
+        
+        code.language-css,
+        .language-css .token.function {
+            color: #0086b3;
+        }
+        /* YAML */
+        
+        .language-yaml .token.atrule {
+            color: #63a35c;
+        }
+        
+        code.language-yaml {
+            color: #183691;
+        }
+        /* Ruby */
+        
+        .language-ruby .token.function {
+            color: #333;
+        }
+        /* Markdown */
+        
+        .language-markdown .token.url {
+            color: #795da3;
+        }
+        /* Makefile */
+        
+        .language-makefile .token.symbol {
+            color: #795da3;
+        }
+        
+        .language-makefile .token.variable {
+            color: #183691;
+        }
+        
+        .language-makefile .token.builtin {
+            color: #0086b3;
+        }
+        /* Bash */
+        
+        .language-bash .token.keyword {
+            color: #0086b3;
+        }
+        /* highlight */
+        
+        pre[data-line] {
+            position: relative;
+            padding: 1em 0 1em 3em;
+        }
+        
+        pre[data-line] .line-highlight-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: transparent;
+            display: block;
+            width: 100%;
+        }
+        
+        pre[data-line] .line-highlight {
+            position: absolute;
+            left: 0;
+            right: 0;
+            padding: inherit 0;
+            margin-top: 1em;
+            background: hsla(24, 20%, 50%, .08);
+            background: linear-gradient(to right, hsla(24, 20%, 50%, .1) 70%, hsla(24, 20%, 50%, 0));
+            pointer-events: none;
+            line-height: inherit;
+            white-space: pre;
+        }
+        
+        pre[data-line] .line-highlight:before,
+        pre[data-line] .line-highlight[data-end]:after {
+            content: attr(data-start);
+            position: absolute;
+            top: .4em;
+            left: .6em;
+            min-width: 1em;
+            padding: 0 .5em;
+            background-color: hsla(24, 20%, 50%, .4);
+            color: hsl(24, 20%, 95%);
+            font: bold 65%/1.5 sans-serif;
+            text-align: center;
+            vertical-align: .3em;
+            border-radius: 999px;
+            text-shadow: none;
+            box-shadow: 0 1px white;
+        }
+        
+        pre[data-line] .line-highlight[data-end]:after {
+            content: attr(data-end);
+            top: auto;
+            bottom: .4em;
+        }
+        
+        html body {
+            font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            overflow: initial;
+            box-sizing: border-box;
+            word-wrap: break-word
+        }
+        
+        html body>:first-child {
+            margin-top: 0
+        }
+        
+        html body h1,
+        html body h2,
+        html body h3,
+        html body h4,
+        html body h5,
+        html body h6 {
+            line-height: 1.2;
+            margin-top: 1em;
+            margin-bottom: 16px;
+            color: #000
+        }
+        
+        html body h1 {
+            font-size: 2.25em;
+            font-weight: 300;
+            padding-bottom: .3em
+        }
+        
+        html body h2 {
+            font-size: 1.75em;
+            font-weight: 400;
+            padding-bottom: .3em
+        }
+        
+        html body h3 {
+            font-size: 1.5em;
+            font-weight: 500
+        }
+        
+        html body h4 {
+            font-size: 1.25em;
+            font-weight: 600
+        }
+        
+        html body h5 {
+            font-size: 1.1em;
+            font-weight: 600
+        }
+        
+        html body h6 {
+            font-size: 1em;
+            font-weight: 600
+        }
+        
+        html body h1,
+        html body h2,
+        html body h3,
+        html body h4,
+        html body h5 {
+            font-weight: 600
+        }
+        
+        html body h5 {
+            font-size: 1em
+        }
+        
+        html body h6 {
+            color: #5c5c5c
+        }
+        
+        html body strong {
+            color: #000
+        }
+        
+        html body del {
+            color: #5c5c5c
+        }
+        
+        html body a:not([href]) {
+            color: inherit;
+            text-decoration: none
+        }
+        
+        html body a {
+            color: #08c;
+            text-decoration: none
+        }
+        
+        html body a:hover {
+            color: #00a3f5;
+            text-decoration: none
+        }
+        
+        html body img {
+            max-width: 100%
+        }
+        
+        html body>p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            word-wrap: break-word
+        }
+        
+        html body>ul,
+        html body>ol {
+            margin-bottom: 16px
+        }
+        
+        html body ul,
+        html body ol {
+            padding-left: 2em
+        }
+        
+        html body ul.no-list,
+        html body ol.no-list {
+            padding: 0;
+            list-style-type: none
+        }
+        
+        html body ul ul,
+        html body ul ol,
+        html body ol ol,
+        html body ol ul {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+        
+        html body li {
+            margin-bottom: 0
+        }
+        
+        html body li.task-list-item {
+            list-style: none
+        }
+        
+        html body li>p {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+        
+        html body .task-list-item-checkbox {
+            margin: 0 .2em .25em -1.8em;
+            vertical-align: middle
+        }
+        
+        html body .task-list-item-checkbox:hover {
+            cursor: pointer
+        }
+        
+        html body blockquote {
+            margin: 16px 0;
+            font-size: inherit;
+            padding: 0 15px;
+            color: #5c5c5c;
+            background-color: #f0f0f0;
+            border-left: 4px solid #d6d6d6
+        }
+        
+        html body blockquote>:first-child {
+            margin-top: 0
+        }
+        
+        html body blockquote>:last-child {
+            margin-bottom: 0
+        }
+        
+        html body hr {
+            height: 4px;
+            margin: 32px 0;
+            background-color: #d6d6d6;
+            border: 0 none
+        }
+        
+        html body table {
+            margin: 10px 0 15px 0;
+            border-collapse: collapse;
+            border-spacing: 0;
+            display: block;
+            width: 100%;
+            overflow: auto;
+            word-break: normal;
+            word-break: keep-all
+        }
+        
+        html body table th {
+            font-weight: bold;
+            color: #000
+        }
+        
+        html body table td,
+        html body table th {
+            border: 1px solid #d6d6d6;
+            padding: 6px 13px
+        }
+        
+        html body dl {
+            padding: 0
+        }
+        
+        html body dl dt {
+            padding: 0;
+            margin-top: 16px;
+            font-size: 1em;
+            font-style: italic;
+            font-weight: bold
+        }
+        
+        html body dl dd {
+            padding: 0 16px;
+            margin-bottom: 16px
+        }
+        
+        html body code {
+            font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+            font-size: .85em !important;
+            color: #000;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            padding: .2em 0
+        }
+        
+        html body code::before,
+        html body code::after {
+            letter-spacing: -0.2em;
+            content: "\00a0"
+        }
+        
+        html body pre>code {
+            padding: 0;
+            margin: 0;
+            font-size: .85em !important;
+            word-break: normal;
+            white-space: pre;
+            background: transparent;
+            border: 0
+        }
+        
+        html body .highlight {
+            margin-bottom: 16px
+        }
+        
+        html body .highlight pre,
+        html body pre {
+            padding: 1em;
+            overflow: auto;
+            font-size: .85em !important;
+            line-height: 1.45;
+            border: #d6d6d6;
+            border-radius: 3px
+        }
+        
+        html body .highlight pre {
+            margin-bottom: 0;
+            word-break: normal
+        }
+        
+        html body pre code,
+        html body pre tt {
+            display: inline;
+            max-width: initial;
+            padding: 0;
+            margin: 0;
+            overflow: initial;
+            line-height: inherit;
+            word-wrap: normal;
+            background-color: transparent;
+            border: 0
+        }
+        
+        html body pre code:before,
+        html body pre tt:before,
+        html body pre code:after,
+        html body pre tt:after {
+            content: normal
+        }
+        
+        html body p,
+        html body blockquote,
+        html body ul,
+        html body ol,
+        html body dl,
+        html body pre {
+            margin-top: 0;
+            margin-bottom: 16px
+        }
+        
+        html body kbd {
+            color: #000;
+            border: 1px solid #d6d6d6;
+            border-bottom: 2px solid #c7c7c7;
+            padding: 2px 4px;
+            background-color: #f0f0f0;
+            border-radius: 3px
+        }
+        
+        @media print {
+            html body {
+                background-color: #fff
+            }
+            html body h1,
+            html body h2,
+            html body h3,
+            html body h4,
+            html body h5,
+            html body h6 {
+                color: #000;
+                page-break-after: avoid
+            }
+            html body blockquote {
+                color: #5c5c5c
+            }
+            html body pre {
+                page-break-inside: avoid
+            }
+            html body table {
+                display: table
+            }
+            html body img {
+                display: block;
+                max-width: 100%;
+                max-height: 100%
+            }
+            html body pre,
+            html body code {
+                word-wrap: break-word;
+                white-space: pre
+            }
+        }
+        
+        .markdown-preview {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box
+        }
+        
+        .markdown-preview .pagebreak,
+        .markdown-preview .newpage {
+            page-break-before: always
+        }
+        
+        .markdown-preview pre.line-numbers {
+            position: relative;
+            padding-left: 3.8em;
+            counter-reset: linenumber
+        }
+        
+        .markdown-preview pre.line-numbers>code {
+            position: relative
+        }
+        
+        .markdown-preview pre.line-numbers .line-numbers-rows {
+            position: absolute;
+            pointer-events: none;
+            top: 1em;
+            font-size: 100%;
+            left: 0;
+            width: 3em;
+            letter-spacing: -1px;
+            border-right: 1px solid #999;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none
+        }
+        
+        .markdown-preview pre.line-numbers .line-numbers-rows>span {
+            pointer-events: none;
+            display: block;
+            counter-increment: linenumber
+        }
+        
+        .markdown-preview pre.line-numbers .line-numbers-rows>span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: .8em;
+            text-align: right
+        }
+        
+        .markdown-preview .mathjax-exps .MathJax_Display {
+            text-align: center !important
+        }
+        
+        .markdown-preview:not([for="preview"]) .code-chunk .btn-group {
+            display: none
+        }
+        
+        .markdown-preview:not([for="preview"]) .code-chunk .status {
+            display: none
+        }
+        
+        .markdown-preview:not([for="preview"]) .code-chunk .output-div {
+            margin-bottom: 16px
+        }
+        
+        .scrollbar-style::-webkit-scrollbar {
+            width: 8px
+        }
+        
+        .scrollbar-style::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background-color: transparent
+        }
+        
+        .scrollbar-style::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: rgba(150, 150, 150, 0.66);
+            border: 4px solid rgba(150, 150, 150, 0.66);
+            background-clip: content-box
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode]) {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            overflow: auto
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+            position: relative;
+            top: 0
+        }
+        
+        @media screen and (min-width:914px) {
+            html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+                padding: 2em calc(50% - 457px + 2em)
+            }
+        }
+        
+        @media screen and (max-width:914px) {
+            html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+                padding: 2em
+            }
+        }
+        
+        @media screen and (max-width:450px) {
+            html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+                font-size: 14px !important;
+                padding: 1em
+            }
+        }
+        
+        @media print {
+            html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn {
+                display: none
+            }
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn {
+            position: fixed;
+            bottom: 8px;
+            left: 8px;
+            font-size: 28px;
+            cursor: pointer;
+            color: inherit;
+            z-index: 99;
+            width: 32px;
+            text-align: center;
+            opacity: .4
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn {
+            opacity: 1
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100%;
+            padding: 32px 0 48px 0;
+            font-size: 14px;
+            box-shadow: 0 0 4px rgba(150, 150, 150, 0.33);
+            box-sizing: border-box;
+            overflow: auto;
+            background-color: inherit
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar {
+            width: 8px
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background-color: transparent
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: rgba(150, 150, 150, 0.66);
+            border: 4px solid rgba(150, 150, 150, 0.66);
+            background-clip: content-box
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a {
+            text-decoration: none
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul {
+            padding: 0 1.6em;
+            margin-top: .8em
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li {
+            margin-bottom: .8em
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul {
+            list-style-type: none
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+            left: 300px;
+            width: calc(100% - 300px);
+            padding: 2em calc(50% - 457px - 150px);
+            margin: 0;
+            box-sizing: border-box
+        }
+        
+        @media screen and (max-width:1274px) {
+            html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+                padding: 2em
+            }
+        }
+        
+        @media screen and (max-width:450px) {
+            html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+                width: 100%
+            }
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview {
+            left: 50%;
+            transform: translateX(-50%)
+        }
+        
+        html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc {
+            display: none
+        }
+        /* Please visit the URL below for more information: */
+        /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+    </style>
+    <style>
+        #modal {
+            position: fixed;
+            top: 2%;
+            left: 2%;
+            border-radius: 4px;
+            text-align: center;
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 2px;
+            box-shadow: 0 3px 6px -4px #7a56561f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+            pointer-events: all;
+            z-index: 1;
+            color: #ecf0f1;
+            /* background-color: #34495e; */
+            background-color: #1abc9c;
+        }
+        
+        .mume.markdown-preview {
+            /* background-color: #27ae60;
+            background-color: #1abc9c; */
+            background-color: #34495e;
+        }
+        
+        .mume-header {
+            /* color: #34495e;
+            color: #ecf0f1; */
+            color: #1abc9c;
+        }
+        
+        table {
+            background-color: #ecf0f1;
+            border-radius: 8px;
+        }
+        
+        .hidden {
+            visibility: hidden;
+        }
+        
+        html body code {
+            cursor: pointer;
+            background-color: #bdc3c7;
+        }
+    </style>
+</head>
+
+<body for="html-export">
+    <div id="modal" class="hidden">嘿！Gitmoji 已复制到剪贴板 😜</div>
+    <div class="mume markdown-preview">
+        <h1 class="mume-header">Emoji &#x63D0;&#x4EA4;&#x4FE1;&#x606F;&#x8BF4;&#x660E;</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>&#x8868;&#x60C5;</th>
+                    <th>&#x7B26;&#x53F7;</th>
+                    <th>&#x8BF4;&#x660E;&#x4FE1;&#x606F;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>&#x1F3A8;</td>
+                    <td><code>:art:</code></td>
+                    <td>&#x6539;&#x5584;&#x7ED3;&#x6784; / &#x683C;&#x5F0F;&#x5316;&#x4EE3;&#x7801;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x26A1;&#xFE0F;</td>
+                    <td><code>:zap:</code></td>
+                    <td>&#x4F18;&#x5316;&#x6027;&#x80FD;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F525;</td>
+                    <td><code>:fire:</code></td>
+                    <td>&#x5220;&#x9664;&#x4EE3;&#x7801;&#x6216;&#x6587;&#x4EF6;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F41B;</td>
+                    <td><code>:bug:</code></td>
+                    <td>&#x4FEE;&#x590D;&#x4E00;&#x822C;&#x7F3A;&#x9677;&#x6F0F;&#x6D1E;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F691;</td>
+                    <td><code>:ambulance:</code></td>
+                    <td>&#x4FEE;&#x590D;&#x5173;&#x952E;&#x6216;&#x7D27;&#x6025;&#x95EE;&#x9898;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x2728;</td>
+                    <td><code>:sparkles:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x65B0;&#x529F;&#x80FD;&#x6216;&#x7279;&#x6027;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F4DD;</td>
+                    <td><code>:memo:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x6587;&#x6863;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F680;</td>
+                    <td><code>:rocket:</code></td>
+                    <td>&#x90E8;&#x7F72;&#x7A0B;&#x5E8F;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F484;</td>
+                    <td><code>:lipstick:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0; UI &#x548C;&#x6837;&#x5F0F;&#x6587;&#x4EF6;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F389;</td>
+                    <td><code>:tada:</code></td>
+                    <td>&#x521D;&#x59CB;&#x5316;&#x63D0;&#x4EA4; / &#x5F00;&#x59CB;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x2705;</td>
+                    <td><code>:white_check_mark:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F512;</td>
+                    <td><code>:lock:</code></td>
+                    <td>&#x4FEE;&#x590D;&#x5B89;&#x5168;&#x95EE;&#x9898;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F916;</td>
+                    <td><code>:robot:</code></td>
+                    <td>&#x4FEE;&#x590D; Android &#x5E73;&#x53F0;&#x4E0A;&#x7684;&#x95EE;&#x9898;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F34F;</td>
+                    <td><code>:green_apple:</code></td>
+                    <td>&#x4FEE;&#x590D; iOS &#x5E73;&#x53F0;&#x4E0A;&#x7684;&#x95EE;&#x9898;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F34E;</td>
+                    <td><code>:apple:</code></td>
+                    <td>&#x4FEE;&#x590D; macOS &#x5E73;&#x53F0;&#x4E0A;&#x7684;&#x95EE;&#x9898;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F427;</td>
+                    <td><code>:penguin:</code></td>
+                    <td>&#x4FEE;&#x590D; Linux &#x5E73;&#x53F0;&#x4E0A;&#x7684;&#x95EE;&#x9898;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F3C1;</td>
+                    <td><code>:checkered_flag:</code></td>
+                    <td>&#x4FEE;&#x590D; Windows &#x5E73;&#x53F0;&#x4E0A;&#x7684;&#x95EE;&#x9898;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F516;</td>
+                    <td><code>:bookmark:</code></td>
+                    <td>&#x53D1;&#x5E03;&#x7248;&#x672C; / &#x6DFB;&#x52A0;&#x6807;&#x7B7E;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F6A8;</td>
+                    <td><code>:rotating_light:</code></td>
+                    <td>&#x4FEE;&#x590D;&#x7F16;&#x8BD1;&#x5668; / &#x94FE;&#x63A5;&#x5668;&#x8B66;&#x544A;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F6A7;</td>
+                    <td><code>:construction:</code></td>
+                    <td>&#x6B63;&#x5728;&#x5F00;&#x53D1;&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x2795;</td>
+                    <td><code>:heavy_plus_sign:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x4F9D;&#x8D56;&#x9879;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x2796;</td>
+                    <td><code>:heavy_minus_sign:</code></td>
+                    <td>&#x79FB;&#x9664;&#x4F9D;&#x8D56;&#x9879;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x2B06;&#xFE0F;</td>
+                    <td><code>:arrow_up:</code></td>
+                    <td>&#x5347;&#x7EA7;&#x4F9D;&#x8D56;&#x7248;&#x672C;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x2B07;&#xFE0F;</td>
+                    <td><code>:arrow_down:</code></td>
+                    <td>&#x964D;&#x7EA7;&#x4F9D;&#x8D56;&#x7248;&#x672C;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F4CC;</td>
+                    <td><code>:pushpin:</code></td>
+                    <td>&#x56FA;&#x5B9A;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x4F9D;&#x8D56;&#x7248;&#x672C;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F433;</td>
+                    <td><code>:whale:</code></td>
+                    <td>Docker &#x5BB9;&#x5668;&#x76F8;&#x5173;&#x5185;&#x5BB9;&#x53D8;&#x66F4;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x2638;</td>
+                    <td><code>:wheel_of_dharma:</code></td>
+                    <td>Kubernetes &#x76F8;&#x5173;&#x5185;&#x5BB9;&#x53D8;&#x66F4;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F477;</td>
+                    <td><code>:construction_worker:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0; CI &#x6784;&#x5EFA;&#x7CFB;&#x7EDF;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F49A;</td>
+                    <td><code>:green_heart:</code></td>
+                    <td>&#x4FEE;&#x590D; CI &#x6784;&#x5EFA;&#x95EE;&#x9898;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F4C8;</td>
+                    <td><code>:chart_with_upwards_trend:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x5206;&#x6790;&#x6216;&#x8DDF;&#x8E2A;&#x4EE3;&#x7801;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x267B;&#xFE0F;</td>
+                    <td><code>:recycle:</code></td>
+                    <td>&#x91CD;&#x6784;&#x4EE3;&#x7801;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F527;</td>
+                    <td><code>:wrench:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F528;</td>
+                    <td><code>:hammer:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x5F00;&#x53D1;&#x811A;&#x672C;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F310;</td>
+                    <td><code>:globe_with_meridians:</code></td>
+                    <td>&#x56FD;&#x9645;&#x5316;&#x548C;&#x672C;&#x5730;&#x5316;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x270F;&#xFE0F;</td>
+                    <td><code>:pencil2:</code></td>
+                    <td>&#x4FEE;&#x6B63;&#x9519;&#x522B;&#x5B57;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F4A9;</td>
+                    <td><code>:poop:</code></td>
+                    <td>&#x7F16;&#x5199;&#x9700;&#x8981;&#x6539;&#x8FDB;&#x7684;&#x7CDF;&#x7CD5;&#x4EE3;&#x7801;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x23EA;</td>
+                    <td><code>:rewind:</code></td>
+                    <td>&#x6062;&#x590D;/&#x56DE;&#x9000;&#x53D8;&#x66F4;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F500;</td>
+                    <td><code>:twisted_rightwards_arrows:</code></td>
+                    <td>&#x5408;&#x5E76;&#x5206;&#x652F;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F4E6;</td>
+                    <td><code>:package:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x5DF2;&#x7F16;&#x8BD1;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x7A0B;&#x5E8F;&#x5305;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F47D;</td>
+                    <td><code>:alien:</code></td>
+                    <td>&#x56E0;&#x5916;&#x90E8; API &#x53D8;&#x66F4;&#x800C;&#x66F4;&#x65B0;&#x4EE3;&#x7801;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F44C;</td>
+                    <td><code>:ok_hand:</code></td>
+                    <td>&#x56E0;&#x4EE3;&#x7801;&#x5BA1;&#x6838;&#x53D8;&#x66F4;&#x800C;&#x66F4;&#x65B0;&#x4EE3;&#x7801;&#xFF08;&#x5408;&#x5E76;&#x8BF7;&#x6C42;&#xFF09;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F69A;</td>
+                    <td><code>:truck:</code></td>
+                    <td>&#x79FB;&#x52A8;&#x6216;&#x91CD;&#x547D;&#x540D;&#x8D44;&#x6E90; &#xFF08;&#x4F8B;&#x5982;&#xFF1A;&#x6587;&#x4EF6;&#x3001;&#x8DEF;&#x5F84;&#x3001;&#x8DEF;&#x7531;&#xFF09;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F4C4;</td>
+                    <td><code>:page_facing_up:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x8BB8;&#x53EF;&#x8BC1;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F4A5;</td>
+                    <td><code>:boom:</code></td>
+                    <td>&#x5F15;&#x5165;&#x91CD;&#x5927;&#x53D8;&#x66F4;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F371;</td>
+                    <td><code>:bento:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x8D44;&#x6E90;&#x6587;&#x4EF6;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x267F;&#xFE0F;</td>
+                    <td><code>:wheelchair:</code></td>
+                    <td>&#x6539;&#x5584;&#x53EF;&#x8BBF;&#x95EE;&#x6027;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F4A1;</td>
+                    <td><code>:bulb:</code></td>
+                    <td>&#x5728;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x6CE8;&#x91CA;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F37B;</td>
+                    <td><code>:beers:</code></td>
+                    <td>&#x9189;&#x9152;&#x5199;&#x4EE3;&#x7801;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F4AC;</td>
+                    <td><code>:speech_balloon:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x6587;&#x672C;&#x548C;&#x6587;&#x5B57;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F5C3;</td>
+                    <td><code>:card_file_box:</code></td>
+                    <td>&#x6267;&#x884C;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x76F8;&#x5173;&#x7684;&#x66F4;&#x6539;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F50A;</td>
+                    <td><code>:loud_sound:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x65E5;&#x5FD7;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F507;</td>
+                    <td><code>:mute:</code></td>
+                    <td>&#x5220;&#x9664;&#x65E5;&#x5FD7;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F465;</td>
+                    <td><code>:busts_in_silhouette:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x8D21;&#x732E;&#x53C2;&#x4E0E;&#x8005;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F6B8;</td>
+                    <td><code>:children_crossing:</code></td>
+                    <td>&#x6539;&#x5584;&#x7528;&#x6237;&#x4F53;&#x9A8C; / &#x53EF;&#x7528;&#x6027;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F3D7;</td>
+                    <td><code>:building_construction:</code></td>
+                    <td>&#x8FDB;&#x884C;&#x67B6;&#x6784;&#x76F8;&#x5173;&#x8C03;&#x6574;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F4F1;</td>
+                    <td><code>:iphone:</code></td>
+                    <td>&#x8FDB;&#x884C;&#x54CD;&#x5E94;&#x5F0F;&#x8BBE;&#x8BA1;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F921;</td>
+                    <td><code>:clown_face:</code></td>
+                    <td>&#x6A21;&#x62DF;&#x6570;&#x636E;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F95A;</td>
+                    <td><code>:egg:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x5F69;&#x86CB;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F648;</td>
+                    <td><code>:see_no_evil:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0; .gitignore &#x6587;&#x4EF6;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F4F8;</td>
+                    <td><code>:camera_flash:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x5FEB;&#x7167;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x2697;</td>
+                    <td><code>:alembic:</code></td>
+                    <td>&#x52A0;&#x5165;&#x5B9E;&#x9A8C;&#x7279;&#x6027;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F50D;</td>
+                    <td><code>:mag:</code></td>
+                    <td>&#x6539;&#x5584; SEO&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F3F7;&#xFE0F;</td>
+                    <td><code>:label:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x4FEE;&#x6539;&#x7C7B;&#x578B;&#xFF08;Flow&#x3001;TypeScript&#xFF09;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F331;</td>
+                    <td><code>:seedling:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x79CD;&#x5B50;&#x6587;&#x4EF6;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F6A9;</td>
+                    <td><code>:triangular_flag_on_post:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x3001;&#x66F4;&#x65B0;&#x6216;&#x5220;&#x9664;&#x529F;&#x80FD;&#x6807;&#x5FD7;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F945;</td>
+                    <td><code>:goal_net:</code></td>
+                    <td>&#x6355;&#x83B7;&#x5F02;&#x5E38;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F4AB;</td>
+                    <td><code>:dizzy:</code></td>
+                    <td>&#x6DFB;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x52A8;&#x753B;&#x548C;&#x8FC7;&#x6E21;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F5D1;</td>
+                    <td><code>:wastebasket:</code></td>
+                    <td>&#x5F03;&#x7528;&#x9700;&#x8981;&#x6E05;&#x7406;&#x7684;&#x4EE3;&#x7801;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F6C2;</td>
+                    <td><code>:passport_control:</code></td>
+                    <td>&#x5904;&#x7406;&#x4E0E;&#x6388;&#x6743;&#x3001;&#x89D2;&#x8272;&#x548C;&#x6743;&#x9650;&#x76F8;&#x5173;&#x7684;&#x4EE3;&#x7801;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1FA79;</td>
+                    <td><code>:adhesive_bandage:</code></td>
+                    <td>&#x975E;&#x5173;&#x952E;&#x95EE;&#x9898;&#x7684;&#x7B80;&#x5355;&#x4FEE;&#x590D;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x1F9D0;</td>
+                    <td><code>:monocle_face:</code></td>
+                    <td>&#x6570;&#x636E;&#x52D8;&#x67E5;/&#x68C0;&#x67E5;&#x3002;</td>
+                </tr>
+                <tr>
+                    <td>&#x26B0;&#xFE0F;</td>
+                    <td><code>:coffin:</code></td>
+                    <td>&#x5220;&#x9664;&#x65E0;&#x7528;&#x4EE3;&#x7801;&#x3002;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        document.querySelector('tbody').addEventListener('click', function(e) {
+            const {
+                localName,
+                innerText
+            } = event.target;
+            if (localName === 'code') {
+                const range = document.createRange();
+                range.selectNode(event.target);
+                const selection = window.getSelection();
+                if (selection.rangeCount > 0) selection.removeAllRanges();
+                selection.addRange(range);
+                document.execCommand('copy');
+                openModal()();
+            }
+
+            // const obj = {};
+            // for (let i in event.target) {
+            //     obj[i] = event.target[i]
+            // }
+        })
+
+        const modal = document.querySelector('#modal')
+
+        function openModal(delay = 2000) {
+            let timers = null;
+            return function() {
+                modal.className = ""
+                console.log(modal.className);
+                timers && clearTimeout(timers)
+                timers = setTimeout(function() {
+                    modal.className = "hidden"
+                    clearTimeout(timers)
+                    timers = null;
+                }, delay)
+
+            }
+        }
+    </script>
+</body>
+
+</html>
