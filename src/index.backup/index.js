@@ -2,6 +2,9 @@ import "./index.css";
 
 // 自动打字
 $(function () {
+  if (true) {
+    return;
+  }
   let inputStr =
     "<p>Dear Basketball,</p>" +
     "<br>" +

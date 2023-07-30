@@ -23,7 +23,7 @@ li {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-image: url(../../assets/image/kobe.jpg);
+    /* background-image: url(../../assets/image/kobe.jpg); */
     background-size: cover;
     background-position: center;
 }
@@ -374,4 +374,21 @@ main>.page-wrapper>.img-wrapper:hover {
     100% {
         opacity: 0;
     }
+}
+
+
+.temp-back{
+    font-size:14px;
+    color:black;
+}
+
+
+.temp-back-title{
+    margin-bottom: 16px;
+}
+
+.temp-back-ul{
+    font-size:16px;
+    text-indent: 2em;
+    line-height: 36px;
 }
