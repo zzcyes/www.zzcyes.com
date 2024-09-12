@@ -105,10 +105,12 @@ main>.page-wrapper>.img-wrapper:hover {
         -ms-transform: translatey(0px);
         -o-transform: translatey(0px);
     }
+
     50% {
         box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
         transform: translatey(-20px);
     }
+
     100% {
         box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
         transform: translatey(0px);
@@ -132,7 +134,7 @@ main>.page-wrapper>.img-wrapper:hover {
 
 .footer-nav .copyright {
     /* color: #737373; */
-    color:#fff;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -145,57 +147,75 @@ main>.page-wrapper>.img-wrapper:hover {
     10% {
         transform: translateY(-40px);
     }
+
     15% {
         transform: translateY(-30px);
     }
+
     20% {
         transform: translateY(-15px);
     }
+
     25% {
         transform: translateY(-0px);
     }
+
     30% {
         transform: translateY(-38px);
     }
+
     35% {
         transform: translateY(-25px);
     }
+
     40% {
         transform: translateY(-10px);
     }
+
     45% {
         transform: translateY(-4px);
     }
+
     50% {
         transform: translateY(-20px);
     }
+
     55% {
         transform: translateY(-40px);
     }
+
     60% {
         transform: translateY(-30px);
     }
+
     65% {
         transform: translateY(-15px);
     }
+
     70% {
         transform: translateY(-0px);
     }
+
     75% {
         transform: translateY(-38px);
     }
+
     80% {
         transform: translateY(-25px);
     }
+
     85% {
         transform: translateY(-10px);
     }
+
     90% {
         transform: translateY(-4px);
     }
+
     95% {
         transform: translateY(-20px);
     }
+
     100% {
         transform: translateY(-8px);
     }
@@ -250,6 +270,12 @@ main>.page-wrapper>.img-wrapper:hover {
     background-image: url(../../assets/image/icon-github.png);
 }
 
+.social-share-element.social-projects {
+    background-image: url(../../assets/image/icon-projects.png);
+    /* background-size: 70%; */
+}
+
+
 .social-share-element.social-resume {
     background-image: url(../../assets/image/icon-resume.png);
     background-size: 70%;
@@ -258,6 +284,10 @@ main>.page-wrapper>.img-wrapper:hover {
 .social-share-element.social-email {
     background-image: url(../../assets/image/icon-email.png);
 }
+
+
+
+
 
 
 /* .social-share-element.social-contact {
@@ -369,9 +399,11 @@ main>.page-wrapper>.img-wrapper:hover {
     0% {
         opacity: 0;
     }
+
     50% {
         opacity: 100;
     }
+
     100% {
         opacity: 0;
     }
