@@ -3,9 +3,9 @@
     "version": "1.0.0",
     "description": "Zhong Zichen's personal blog",
     "scripts": {
-        "dev": "cross-env NODE_OPTIONS=--max-old-space-size=4096 DEBUG=rspack* rspack serve --config rspack.config.js",
-        "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 DEBUG=rspack* rspack build --config rspack.config.js",
-        "preview": "rspack preview --config rspack.config.js",
+        "dev": "rspack serve",
+        "build": "cross-env NODE_ENV=production rspack build",
+        "preview": "serve html -s -p 4000",
         "build:webpack": "webpack --config build/webpack.config.js",
         "dev:webpack": "webpack serve --mode development",
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,6 +29,7 @@
         "less-loader": "^9.0.0",
         "optimize-css-assets-webpack-plugin": "^6.0.0",
         "postcss-loader": "^5.3.0",
+        "serve": "^14.2.4",
         "style-loader": "^2.0.0",
         "terser-webpack-plugin": "^5.3.14",
         "url-loader": "^4.1.1",

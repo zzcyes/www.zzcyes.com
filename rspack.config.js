@@ -180,12 +180,6 @@ module.exports = {
     hot: true,
     open: true,
   },
-  preview: {
-    port: 4000,
-    host: '0.0.0.0',
-    open: true,
-    compress: true,
-  },
   performance: {
     hints: process.env.NODE_ENV === 'production' ? 'warning' : false,
     maxEntrypointSize: 512000,
