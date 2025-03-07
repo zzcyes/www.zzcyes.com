@@ -75,6 +75,11 @@ module.exports = {
           to: "assets/resouce",
           noErrorOnMissing: true,
         },
+        {
+          from: path.resolve(__dirname, "blog.conf"),
+          to: "",
+          noErrorOnMissing: true,
+        },
       ],
     }),
     new CompressionWebpackPlugin({
