@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
+const { rspack } = require('@rspack/core');
 
 // 获取入口和HTML配置
 const getEntryAndHtmlConfig = () => {
@@ -62,6 +63,20 @@ module.exports = {
   },
   plugins: [
     ...getHtmlPlugins(),
+    new rspack.CopyRspackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "src/assets/image"),
+          to: "assets/image",
+          noErrorOnMissing: true,
+        },
+        {
+          from: path.resolve(__dirname, "src/assets/resouce"),
+          to: "assets/resouce",
+          noErrorOnMissing: true,
+        },
+      ],
+    }),
     new CompressionWebpackPlugin({
       algorithm: 'gzip',
       test: /\.(js|css|html|svg)$/,
@@ -107,7 +122,7 @@ module.exports = {
           },
         },
         generator: {
-          filename: "assets/images/[name].[hash:8][ext]",
+          filename: "assets/image/[name].[hash:8][ext]",
         },
       },
     ],

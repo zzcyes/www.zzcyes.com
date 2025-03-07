@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "rspack serve",
         "build": "cross-env NODE_ENV=production rspack build",
-        "preview": "serve html -s -p 4000",
+        "preview": "serve html -p 4000",
         "build:webpack": "webpack --config build/webpack.config.js",
         "dev:webpack": "webpack serve --mode development",
         "test": "echo \"Error: no test specified\" && exit 1"
