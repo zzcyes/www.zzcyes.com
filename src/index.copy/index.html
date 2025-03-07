@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="钟子晨,个人博客,前端,工作,简历">
+    <title>Home | 钟子晨的个人学习分享小站</title>
+    <link rel="icon" href="assets/image/favicon.ico" type="image/x-icon" />
+    <link href='https://fonts.googleapis.com/css?family=Cabin+Condensed:700' rel='stylesheet' type='text/css'>
+    <style>
+        /**
+    * loading
+    */
+        
+        body {
+            margin: 0!important;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 0;
+            height: 0;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background-color: #e6dcdc;
+            overflow: hidden;
+        }
+        
+        .cat {
+            position: relative;
+            width: 100%;
+            max-width: 20em;
+            overflow: hidden;
+            background-color: #e6dcdc;
+        }
+        
+        .cat::before {
+            content: "";
+            display: block;
+            padding-bottom: 100%;
+        }
+        
+        .cat:hover>* {
+            -webkit-animation-play-state: paused;
+            animation-play-state: paused;
+        }
+        
+        .cat:active>* {
+            -webkit-animation-play-state: running;
+            animation-play-state: running;
+        }
+        
+        .cat__body,
+        .cat__tail,
+        .cat__head {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            -webkit-animation: rotating 2.79s cubic-bezier(0.65, 0.54, 0.12, 0.93) infinite;
+            animation: rotating 2.79s cubic-bezier(0.65, 0.54, 0.12, 0.93) infinite;
+        }
+        
+        .cat__body::before,
+        .cat__tail::before,
+        .cat__head::before {
+            content: "";
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            background-size: 200%;
+            background-repeat: no-repeat;
+            background-image: url(https://gitee.com/zzcyes/repository/raw/master/images/blog-cat-loading.png);
+        }
+        
+        .cat__head::before {
+            top: 0;
+            right: 0;
+            background-position: 100% 0%;
+            transform-origin: 0% 100%;
+            transform: rotate(90deg);
+        }
+        
+        .cat__tail {
+            -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+        }
+        
+        .cat__tail::before {
+            left: 0;
+            bottom: 0;
+            background-position: 0% 100%;
+            transform-origin: 100% 0%;
+            transform: rotate(-30deg);
+        }
+        
+        .cat__body {
+            -webkit-animation-delay: 0.1s;
+            animation-delay: 0.1s;
+        }
+        
+        .cat__body:nth-of-type(2) {
+            -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+        }
+        
+        .cat__body::before {
+            right: 0;
+            bottom: 0;
+            background-position: 100% 100%;
+            transform-origin: 0% 0%;
+        }
+        
+        @-webkit-keyframes rotating {
+            from {
+                transform: rotate(720deg);
+            }
+            to {
+                transform: none;
+            }
+        }
+        
+        @keyframes rotating {
+            from {
+                transform: rotate(720deg);
+            }
+            to {
+                transform: none;
+            }
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?d7a72cf7efff1119acd153abb77bd99b";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body>
+    <div class="loading">
+        <div class="cat">
+            <div class="cat__body"></div>
+            <div class="cat__body"></div>
+            <div class="cat__tail"></div>
+            <div class="cat__head"></div>
+        </div>
+    </div>
+    <div id="home-wrapper" style="display: none;">
+        <main>
+            <div class="page-wrapper" id="main-page">
+                <div id="banner" class="hidden">
+                    <a href="javascript:void"></a>
+                </div>
+                <div class="img-wrapper">
+                    <div class="photo-head"></div>
+                </div>
+                <div id="content"></div>
+                <div id="contact-panel">
+                    <a class="social-share-element social-article" href="https://www.zzcyes.com/blogs/" title="博客"></a>
+                    <a class="social-share-element social-github" href="https://github.com/zzcyes" title="GitHub"></a>
+                    <a class="social-share-element social-projects" href="https://www.zzcyes.com/projects/webfolio" title="Projects"></a>
+                    <!-- <a class="social-share-element social-resume" href="resume.html" title="简历"></a> -->
+                    <a class="social-share-element social-email" href="mailto:zhongzichen1997@163.com" title="邮箱"></a>
+                    <!-- <a class="social-share-element social-luck" href="luck.html" title="Luck"></a> -->
+                    <a class="social-share-element social-guitar" href="rain.html" title="Rain"></a>
+                    <a class="social-share-element social-kobe" href="kobe.html" title="Mambma Never Out"></a>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <ul class="footer-nav">
+                <li class="copyright">
+                    Designed & Powerd by zhongzichen
+                </li>
+                <li class="copyright">
+                    Copyright© 2019-2023 zzcyes
+                </li>
+                <li>
+                    <a class="copyright" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030402006382">
+                        <img src="assets/image/gov.png" style="float:left;margin-right:4px"/>
+                       粤公网安备 44030402006382号
+                    </a>
+                    |
+                    <a class="copyright" target="_blank" href="https://beian.miit.gov.cn/">粤ICP备19065257号-1</a>
+                </li>
+            </ul>
+        </footer>
+    </div>
+</body>
+</div>
+
+</html>

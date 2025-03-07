@@ -355,6 +355,7 @@ main>.page-wrapper>.img-wrapper:hover {
 /* 自动打字 */
 
 #content {
+    color: white;
     height: 60%;
     width: 90%;
     padding: 0 4%;
@@ -382,29 +383,16 @@ main>.page-wrapper>.img-wrapper:hover {
     border-radius: 5px;
 }
 
-#content p {
-    display: block;
-    margin: 0;
-    color: hsla(0, 0%, 100%, .7);
-    font-family: Hind, Georgia, Tahoma, Sans-Serif;
+#content>p {
+    color: rgba(256, 256, 256, 0.5);
+    color: rgba(256, 256, 256, 0.7);
     font-size: 20px;
     line-height: 28px;
-    white-space: pre-wrap;
+    font-family: "Hind", "Georgia", Tahoma, Sans-Serif;
 }
 
-#content p.indent {
+#content>p.indent {
     text-indent: 2em;
-}
-
-#content>p:first-child {
-    text-indent: 0;
-}
-
-#content>br {
-    display: block;
-    margin: 0;
-    content: "";
-    margin-bottom: 1em;
 }
 
 @keyframes Twinkle {
@@ -422,17 +410,8 @@ main>.page-wrapper>.img-wrapper:hover {
 #wink {
     display: inline-block;
     font-weight: bold;
-    font-size: inherit;
-    color: hsla(0, 0%, 100%, .7);
-    margin-left: 0;
-    position: relative;
+    color: #fff;
+    margin-left: 2px;
     animation: Twinkle 1s ease-in-out infinite;
     -webkit-animation: Twinkle 1s ease-in-out infinite;
-}
-
-.cursor-wrapper {
-    display: inline;
-    white-space: pre-wrap;
-    font-size: inherit;
-    line-height: inherit;
 }

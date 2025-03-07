@@ -1,8 +1,7 @@
 import "./index.css";
-
 // 自动打字
 $(function () {
-  let inputStr =
+  const inputStr =
     "<p>Dear Basketball,</p>" +
     "<br>" +
     "<p class='indent'>From the moment I started rolling my dad's tube socks And shooting imaginary Game-winning shots In the Great Western Forum I knew one thing was real:</p>" +
@@ -11,120 +10,140 @@ $(function () {
     "<br>" +
     "<p class='indent'>Love you always, Kobe</p>";
 
-  const TYPING_SPEED = 50; // 打字速度
-  const SCROLL_SPEED = 100; // 滚动速度
+  const TYPING_SPEED = 50;
+  const SCROLL_SPEED = 100;
   let isTyping = true;
-  let $content = $("#content");
-  let $cursor;
+  const $content = $("#content");
   
-  // 创建光标元素
-  function createCursor() {
-    $cursor = $('<span id="wink">|</span>').css({
-      animation: "Twinkle 1s ease-in-out infinite",
-      color: "#fff",
-      fontWeight: "bold"
-    });
-    return $cursor;
-  }
-
-  // 解析HTML标签
-  function parseHTML(text, startIndex) {
-    if (text[startIndex] !== '<') return { tag: null, endIndex: startIndex };
-    
-    let endIndex = text.indexOf('>', startIndex);
-    if (endIndex === -1) return { tag: null, endIndex: startIndex };
-    
-    let tag = text.substring(startIndex, endIndex + 1);
-    return { tag, endIndex: endIndex + 1 };
-  }
-
-  // 平滑滚动
-  function smoothScroll() {
-    const nScrollHeight = $content[0].scrollHeight;
-    const currentScroll = $content.scrollTop();
-    const targetScroll = nScrollHeight - $content.height();
-    
-    if (currentScroll < targetScroll) {
-      $content.stop().animate({
-        scrollTop: targetScroll
-      }, SCROLL_SPEED);
+  class TypeWriter {
+    constructor(element, text, speed) {
+      this.element = element;
+      this.text = text;
+      this.speed = speed;
+      this.cursor = this.createCursor();
+      this.currentIndex = 0;
+      this.isTyping = true;
     }
-  }
 
-  // 打字效果
-  function typeWriter(index = 0) {
-    if (!isTyping || index >= inputStr.length) {
-      if (isTyping) {
-        $content.html(inputStr);
-        createCursor().appendTo($content);
+    createCursor() {
+      return $('<span id="wink">|</span>').css({
+        animation: "Twinkle 1s ease-in-out infinite",
+        color: "#fff",
+        fontWeight: "bold",
+        display: "inline",
+        position: "relative",
+        verticalAlign: "baseline"
+      });
+    }
+
+    parseHTML(startIndex) {
+      if (this.text[startIndex] !== '<') return { tag: null, endIndex: startIndex };
+      
+      const endIndex = this.text.indexOf('>', startIndex);
+      if (endIndex === -1) return { tag: null, endIndex: startIndex };
+      
+      const tag = this.text.substring(startIndex, endIndex + 1);
+      return { tag, endIndex: endIndex + 1 };
+    }
+
+    smoothScroll() {
+      const scrollHeight = this.element[0].scrollHeight;
+      const currentScroll = this.element[0].scrollTop;
+      const targetScroll = scrollHeight - this.element[0].clientHeight;
+      
+      if (currentScroll < targetScroll) {
+        this.element[0].scrollTo({
+          top: targetScroll,
+          behavior: 'smooth'
+        });
       }
-      return;
     }
 
-    const { tag, endIndex } = parseHTML(inputStr, index);
-    if (tag) {
-      // 如果是HTML标签，直接添加
-      $content.html(inputStr.slice(0, endIndex));
-      createCursor().appendTo($content);
-      setTimeout(() => typeWriter(endIndex), TYPING_SPEED / 2);
-    } else {
-      // 如果是普通文字，逐字添加
-      $content.html(inputStr.slice(0, index + 1));
-      createCursor().appendTo($content);
-      setTimeout(() => typeWriter(index + 1), TYPING_SPEED);
+    type() {
+      if (!this.isTyping || this.currentIndex >= this.text.length) {
+        if (this.isTyping) {
+          const finalText = this.text.replace(/<br>/g, '<br><span class="cursor-wrapper">');
+          this.element.html(finalText + this.cursor.prop('outerHTML') + '</span>');
+          this.isTyping = false;
+          setTimeout(() => {
+            this.element[0].scrollTop = this.element[0].scrollHeight;
+          }, 0);
+        }
+        return;
+      }
+
+      const { tag, endIndex } = this.parseHTML(this.currentIndex);
+      let currentText = this.text.slice(0, tag ? endIndex : this.currentIndex + 1);
+      
+      // 处理换行情况
+      currentText = currentText.replace(/<br>/g, '<br><span class="cursor-wrapper">');
+      
+      if (tag) {
+        this.element.html(currentText + this.cursor.prop('outerHTML') + '</span>');
+        setTimeout(() => {
+          this.currentIndex = endIndex;
+          this.type();
+        }, this.speed / 2);
+      } else {
+        this.element.html(currentText + this.cursor.prop('outerHTML') + '</span>');
+        setTimeout(() => {
+          this.currentIndex++;
+          this.type();
+        }, this.speed);
+      }
+
+      this.smoothScroll();
     }
 
-    smoothScroll();
+    stop() {
+      this.isTyping = false;
+      const finalText = this.text.replace(/<br>/g, '<br><span class="cursor-wrapper">');
+      this.element.html(finalText + this.cursor.prop('outerHTML') + '</span>');
+      setTimeout(() => {
+        this.element[0].scrollTop = this.element[0].scrollHeight;
+      }, 0);
+    }
   }
 
-  // 开始打字
-  typeWriter();
+  // 初始化打字效果
+  const typeWriter = new TypeWriter($content, inputStr, TYPING_SPEED);
+  typeWriter.type();
 
   // 点击事件处理
-  $content.on("click", function() {
-    isTyping = false;
-    $content.html(inputStr);
-    createCursor().appendTo($content);
-  });
+  $content.on("click", () => typeWriter.stop());
 });
 
 // 切换主题
 $(document).ready(function () {
-  $("#home-wrapper").css("display", "flex");
-  $("#home-wrapper").addClass("home-wrapper");
+  $("#home-wrapper").css("display", "flex").addClass("home-wrapper");
   $(".loading").css("display", "none");
+  
   $(".photo-head").on("click", function () {
-    if (Array.from($("#main-page")[0].classList).includes("gold-theme")) {
-      $("#banner")[0].classList.add("hidden");
-      $("#main-page")[0].classList.remove("gold-theme");
+    const $mainPage = $("#main-page");
+    const $banner = $("#banner");
+    
+    if ($mainPage.hasClass("gold-theme")) {
+      $banner.addClass("hidden");
+      $mainPage.removeClass("gold-theme");
     } else {
-      $("#banner")[0].classList.remove("hidden");
-      $("#main-page")[0].classList.add("gold-theme");
+      $banner.removeClass("hidden");
+      $mainPage.addClass("gold-theme");
     }
   });
 });
 
-var os = (function () {
-  var ua = navigator.userAgent,
-    isWindowsPhone = /(?:Windows Phone)/.test(ua),
-    isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
-    isAndroid = /(?:Android)/.test(ua),
-    isFireFox = /(?:Firefox)/.test(ua),
-    isChrome = /(?:Chrome|CriOS)/.test(ua),
-    isTablet =
-      /(?:iPad|PlayBook)/.test(ua) ||
-      (isAndroid && !/(?:Mobile)/.test(ua)) ||
-      (isFireFox && /(?:Tablet)/.test(ua)),
-    isPhone = /(?:iPhone)/.test(ua) && !isTablet,
-    isPc = !isPhone && !isAndroid && !isSymbian;
+// 设备检测
+const os = (() => {
+  const ua = navigator.userAgent;
   return {
-    isTablet: isTablet,
-    isPhone: isPhone,
-    isAndroid: isAndroid,
-    isPc: isPc,
+    isTablet: /(?:iPad|PlayBook)/.test(ua) || (/(?:Android)/.test(ua) && !/(?:Mobile)/.test(ua)) || (/(?:Firefox)/.test(ua) && /(?:Tablet)/.test(ua)),
+    isPhone: /(?:iPhone)/.test(ua) && !/(?:iPad|PlayBook)/.test(ua),
+    isAndroid: /(?:Android)/.test(ua),
+    isPc: !(/(?:iPhone|Android|Windows Phone|SymbianOS)/.test(ua))
   };
 })();
 
+// 移动设备隐藏幸运抽奖
 if (os.isAndroid || os.isPhone) {
   $(".social-share-element.social-luck").css("display", "none");
 }

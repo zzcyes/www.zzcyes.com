@@ -51,19 +51,25 @@ const getHtmlPlugins = () => {
 
 console.debug("entryConfig", entryConfig);
 
+const isDev = process.env.NODE_ENV !== "production";
+
 /** @type {import('@rspack/cli').Configuration} */
 module.exports = {
-  mode: process.env.NODE_ENV === "production" ? "production" : "development",
+  mode: isDev ? "development" : "production",
   entry: entryConfig,
   output: {
-    publicPath: "./",
+    // 开发环境使用 '/'，生产环境使用 './'
+    publicPath: isDev ? "/" : "./",
     path: path.resolve(__dirname, "./html"),
-    filename: "assets/js/[name].[contenthash:8].js",
+    filename: isDev ? "assets/js/[name].js" : "assets/js/[name].[contenthash:8].js",
     clean: true,
   },
   plugins: [
     ...getHtmlPlugins(),
-    new rspack.CopyRspackPlugin({
+    // 开发环境启用 HMR 插件
+    isDev && new rspack.HotModuleReplacementPlugin(),
+    // 只在生产环境使用 CopyRspackPlugin
+    !isDev ? new rspack.CopyRspackPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, "src/assets/image"),
@@ -81,15 +87,16 @@ module.exports = {
           noErrorOnMissing: true,
         },
       ],
-    }),
-    new CompressionWebpackPlugin({
+    }) : false,
+    // 只在生产环境使用 CompressionWebpackPlugin
+    !isDev ? new CompressionWebpackPlugin({
       algorithm: 'gzip',
       test: /\.(js|css|html|svg|eot|ttf|woff|ico|png|jpg|gif|json|txt|map)$/,
       threshold: 1024,
       minRatio: 0.8,
       deleteOriginalAssets: false,
-    }),
-  ],
+    }) : false,
+  ].filter(Boolean),
   module: {
     rules: [
       {
@@ -121,14 +128,9 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|ico)$/,
-        type: "asset",
-        parser: {
-          dataUrlCondition: {
-            maxSize: 4 * 1024,
-          },
-        },
+        type: "asset/resource",
         generator: {
-          filename: "assets/image/[name][ext]",
+          filename: "assets/image/[name].[hash:8][ext]",
         },
       },
     ],
@@ -140,14 +142,14 @@ module.exports = {
     extensions: [".js", ".css"],
   },
   optimization: {
-    minimize: process.env.NODE_ENV === 'production',
+    minimize: !isDev,
     minimizer: [
       new TerserPlugin({
         parallel: true,
         terserOptions: {
           compress: {
-            drop_console: process.env.NODE_ENV === 'production',
-            drop_debugger: process.env.NODE_ENV === 'production',
+            drop_console: !isDev,
+            drop_debugger: !isDev,
           },
           format: {
             comments: false,
@@ -170,7 +172,10 @@ module.exports = {
         },
       }),
     ],
-    splitChunks: {
+    // 开发环境简化 splitChunks 配置
+    splitChunks: isDev ? {
+      chunks: 'all',
+    } : {
       chunks: 'all',
       minSize: 20000,
       minChunks: 1,
@@ -200,13 +205,29 @@ module.exports = {
     port: 3000,
     hot: true,
     open: true,
+    historyApiFallback: true,
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+      progress: true,
+    },
+    devMiddleware: {
+      writeToDisk: false,
+    },
+    watchFiles: ['src/**/*'],
   },
   performance: {
-    hints: process.env.NODE_ENV === 'production' ? 'warning' : false,
+    hints: !isDev ? 'warning' : false,
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
   infrastructureLogging: {
-    level: process.env.NODE_ENV === 'production' ? 'warn' : 'verbose',
+    level: !isDev ? 'warn' : 'info',
   },
+  // 开发环境启用 source map
+  devtool: isDev ? 'eval-cheap-module-source-map' : false,
+  // 设置目标环境
+  target: isDev ? 'web' : ['web', 'browserslist'],
 }; 
