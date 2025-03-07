@@ -114,7 +114,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff)$/,
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|ico)$/,
         type: "asset",
         parser: {
           dataUrlCondition: {
@@ -122,7 +122,7 @@ module.exports = {
           },
         },
         generator: {
-          filename: "assets/image/[name].[hash:8][ext]",
+          filename: "assets/image/[name][ext]",
         },
       },
     ],
