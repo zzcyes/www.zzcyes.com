@@ -1,6 +1,9 @@
 const path = require("path");
 const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
 
 // 获取入口和HTML配置
 const getEntryAndHtmlConfig = () => {
@@ -19,7 +22,17 @@ const getEntryAndHtmlConfig = () => {
         template: path.resolve(modulesPath, dirName, "./index.html"),
         chunks: [dirName],
         filename: `${dirName}.html`,
-        minify: false, // 禁用 HTML 压缩，可能导致问题
+        minify: process.env.NODE_ENV === 'production' ? {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeRedundantAttributes: true,
+          useShortDoctype: true,
+          removeEmptyAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          keepClosingSlash: true,
+          minifyCSS: true,
+          minifyJS: true,
+        } : false,
       });
     }
   });
@@ -49,17 +62,50 @@ module.exports = {
   },
   plugins: [
     ...getHtmlPlugins(),
-    // 移除其他可能导致问题的插件
+    new CompressionWebpackPlugin({
+      algorithm: 'gzip',
+      test: /\.(js|css|html|svg)$/,
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
   ],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: {
+                auto: true,
+                localIdentName: "[local]_[hash:base64:5]",
+              },
+            },
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  "autoprefixer",
+                  "cssnano",
+                ],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff)$/,
-        type: "asset/resource",
+        type: "asset",
+        parser: {
+          dataUrlCondition: {
+            maxSize: 4 * 1024,
+          },
+        },
         generator: {
           filename: "assets/images/[name].[hash:8][ext]",
         },
@@ -73,9 +119,56 @@ module.exports = {
     extensions: [".js", ".css"],
   },
   optimization: {
-    // 简化优化配置
+    minimize: process.env.NODE_ENV === 'production',
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          compress: {
+            drop_console: process.env.NODE_ENV === 'production',
+            drop_debugger: process.env.NODE_ENV === 'production',
+          },
+          format: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+      new CssMinimizerPlugin({
+        parallel: true,
+        minimizerOptions: {
+          preset: [
+            'default',
+            {
+              discardComments: { removeAll: true },
+              normalizeWhitespace: true,
+              minifyFontValues: true,
+              minifyGradients: true,
+            },
+          ],
+        },
+      }),
+    ],
     splitChunks: {
-      chunks: "all",
+      chunks: 'all',
+      minSize: 20000,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+          name: 'vendors',
+        },
+        common: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+          name: 'common',
+        },
+      },
     },
   },
   devServer: {
@@ -87,15 +180,18 @@ module.exports = {
     hot: true,
     open: true,
   },
-  // 添加 preview 配置
   preview: {
-    port: 4000, // 使用不同的端口，避免与开发服务器冲突
+    port: 4000,
     host: '0.0.0.0',
     open: true,
     compress: true,
   },
-  // 添加调试信息
+  performance: {
+    hints: process.env.NODE_ENV === 'production' ? 'warning' : false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
   infrastructureLogging: {
-    level: 'verbose',
+    level: process.env.NODE_ENV === 'production' ? 'warn' : 'verbose',
   },
 }; 
