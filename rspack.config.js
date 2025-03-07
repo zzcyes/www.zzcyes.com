@@ -84,9 +84,10 @@ module.exports = {
     }),
     new CompressionWebpackPlugin({
       algorithm: 'gzip',
-      test: /\.(js|css|html|svg)$/,
-      threshold: 10240,
+      test: /\.(js|css|html|svg|eot|ttf|woff|ico|png|jpg|gif|json|txt|map)$/,
+      threshold: 1024,
       minRatio: 0.8,
+      deleteOriginalAssets: false,
     }),
   ],
   module: {
