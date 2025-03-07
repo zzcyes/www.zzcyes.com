@@ -11,61 +11,80 @@ $(function () {
     "<br>" +
     "<p class='indent'>Love you always, Kobe</p>";
 
-  function insertStr(soure, start, newStr) {
-    if (!newStr) {
-      return soure;
-    }
-    return soure.slice(0, start) + newStr + soure.slice(start);
+  const TYPING_SPEED = 50; // 打字速度
+  const SCROLL_SPEED = 100; // 滚动速度
+  let isTyping = true;
+  let $content = $("#content");
+  let $cursor;
+  
+  // 创建光标元素
+  function createCursor() {
+    $cursor = $('<span id="wink">|</span>').css({
+      animation: "Twinkle 1s ease-in-out infinite",
+      color: "#fff",
+      fontWeight: "bold"
+    });
+    return $cursor;
   }
 
-  let count = 0;
+  // 解析HTML标签
+  function parseHTML(text, startIndex) {
+    if (text[startIndex] !== '<') return { tag: null, endIndex: startIndex };
+    
+    let endIndex = text.indexOf('>', startIndex);
+    if (endIndex === -1) return { tag: null, endIndex: startIndex };
+    
+    let tag = text.substring(startIndex, endIndex + 1);
+    return { tag, endIndex: endIndex + 1 };
+  }
 
-  //自动打字
-  let timer = setInterval(() => {
-    if (count >= inputStr.length) {
-      $("#content").html(
-        `${insertStr(inputStr, -4, '<span id="wink">|</span>')}`
-      );
-      $("#wink").css("animation", "Twinkle 0.2s infinite");
-      clearInterval(timer);
-      timer = null;
-      return false;
+  // 平滑滚动
+  function smoothScroll() {
+    const nScrollHeight = $content[0].scrollHeight;
+    const currentScroll = $content.scrollTop();
+    const targetScroll = nScrollHeight - $content.height();
+    
+    if (currentScroll < targetScroll) {
+      $content.stop().animate({
+        scrollTop: targetScroll
+      }, SCROLL_SPEED);
     }
+  }
 
-    if (inputStr[count] === "<") {
-      if (inputStr[count + 2] === ">") {
-        count = count + 2; // <p>
-      } else if (inputStr[count + 3] === ">") {
-        count = count + 3; // </p>
-      } else if (inputStr[count + 17] === ">") {
-        count = count + 17; // <p class='indent'>
+  // 打字效果
+  function typeWriter(index = 0) {
+    if (!isTyping || index >= inputStr.length) {
+      if (isTyping) {
+        $content.html(inputStr);
+        createCursor().appendTo($content);
       }
-      $("#content").html(`${inputStr.slice(0, count)}<span id="wink">|</span>`);
+      return;
+    }
+
+    const { tag, endIndex } = parseHTML(inputStr, index);
+    if (tag) {
+      // 如果是HTML标签，直接添加
+      $content.html(inputStr.slice(0, endIndex));
+      createCursor().appendTo($content);
+      setTimeout(() => typeWriter(endIndex), TYPING_SPEED / 2);
     } else {
-      $("#content").html(
-        `${inputStr.slice(0, count++)}<span id="wink">|</span>`
-      );
+      // 如果是普通文字，逐字添加
+      $content.html(inputStr.slice(0, index + 1));
+      createCursor().appendTo($content);
+      setTimeout(() => typeWriter(index + 1), TYPING_SPEED);
     }
-    $("#wink").css("animation", "Twinkle 0.2s infinite");
 
-    const nScrollHight = $("#content")[0] && $("#content")[0].scrollHeight;
-    const nScrollTop = $("#content")[0] && $("#content")[0].scrollTop;
-    if (nScrollTop < nScrollHight) {
-      $("#content")[0].scrollTop = nScrollTop + nScrollHight;
-    }
-  }, 50);
+    smoothScroll();
+  }
 
-  // 点击清空！！！
-  $("#content").click(function () {
-    clearInterval(timer);
-    timer = null;
-    $("#content").html(inputStr);
-  });
+  // 开始打字
+  typeWriter();
 
-  $("#content p").click(function () {
-    clearInterval(timer);
-    timer = null;
-    $("#content").html(inputStr);
+  // 点击事件处理
+  $content.on("click", function() {
+    isTyping = false;
+    $content.html(inputStr);
+    createCursor().appendTo($content);
   });
 });
 

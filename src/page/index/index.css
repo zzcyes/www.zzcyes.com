@@ -397,14 +397,21 @@ main>.page-wrapper>.img-wrapper:hover {
 
 @keyframes Twinkle {
     0% {
-        opacity: 0;
+        opacity: 1;
     }
-
     50% {
-        opacity: 100;
-    }
-
-    100% {
         opacity: 0;
     }
+    100% {
+        opacity: 1;
+    }
+}
+
+#wink {
+    display: inline-block;
+    font-weight: bold;
+    color: #fff;
+    margin-left: 2px;
+    animation: Twinkle 1s ease-in-out infinite;
+    -webkit-animation: Twinkle 1s ease-in-out infinite;
 }
