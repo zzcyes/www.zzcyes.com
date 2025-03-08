@@ -5,6 +5,9 @@ const LOADING_FADE_OUT_TIME = LOADING_DELAY_TIME - 200;
 
 // 页面加载完成后处理
 $(window).on('load', function() {
+  // 更新版权年份
+  $("#current-year").text(new Date().getFullYear());
+  
   // 添加一个小延迟，确保加载动画有足够的时间显示
   setTimeout(function() {
     // 隐藏加载动画，显示主内容
