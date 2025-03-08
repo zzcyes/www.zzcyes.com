@@ -11,9 +11,91 @@ $(window).on('load', function() {
     $(".loading").fadeOut(LOADING_FADE_OUT_TIME, function() {
       $(this).css("display", "none");
       $("#home-wrapper").css("display", "flex").addClass("home-wrapper");
+      
+      // 初始化头像动画
+      initAvatarAnimation();
     });
-  }, LOADING_DELAY_TIME); // 1秒延迟
+  }, LOADING_DELAY_TIME);
 });
+
+// 初始化头像动画
+function initAvatarAnimation() {
+  const avatar = $(".img-wrapper")[0];
+  const photoHead = $(".photo-head")[0];
+  const net = $(".net")[0];
+  
+  // 创建主时间线
+  const mainTimeline = gsap.timeline({ 
+    repeat: -1,
+    repeatDelay: 1
+  });
+  
+  // 篮网动画
+  function animateNet() {
+    gsap.to(net, {
+      duration: 0.4,
+      keyframes: [
+        { transform: "rotateX(10deg) scaleY(1)", ease: "power1.in" },
+        { transform: "rotateX(20deg) scaleY(1.2)", ease: "power1.out" },
+        { transform: "rotateX(15deg) scaleY(1.1)", ease: "elastic.out(1, 0.3)" },
+        { transform: "rotateX(10deg) scaleY(1)", ease: "elastic.out(1, 0.2)" }
+      ],
+      stagger: 0.1
+    });
+  }
+  
+  // 点击时添加额外的篮球旋转效果和主题切换
+  $(avatar).click(function() {
+    if (!gsap.isTweening(this)) {
+      // 暂停CSS动画
+      photoHead.style.animationPlayState = 'paused';
+      
+      // 切换主题
+      const $mainPage = $(".page-wrapper");
+      const $banner = $("#banner");
+      
+      if ($mainPage.hasClass("gold-theme")) {
+        $banner.addClass("hidden");
+        $mainPage.removeClass("gold-theme");
+      } else {
+        $banner.removeClass("hidden");
+        $mainPage.addClass("gold-theme");
+      }
+      
+      // 使用GSAP创建更动态的旋转
+      gsap.to(photoHead, {
+        duration: 0.8,
+        rotation: "+=360",
+        scale: 1.2,
+        ease: "power1.out",
+        onComplete: () => {
+          gsap.to(photoHead, {
+            duration: 0.4,
+            scale: 1,
+            ease: "bounce.out",
+            onComplete: () => {
+              // 恢复CSS动画
+              photoHead.style.animationPlayState = 'running';
+              
+              // 触发篮网动画
+              animateNet();
+            }
+          });
+        }
+      });
+    }
+  });
+  
+  // 鼠标悬停时暂停/恢复动画
+  $(photoHead).hover(
+    function() {
+      this.style.animationPlayState = 'paused';
+    },
+    function() {
+      this.style.animationPlayState = 'running';
+    }
+  );
+}
 
 // 自动打字
 $(function () {
@@ -129,22 +211,6 @@ $(function () {
 
   // 点击事件处理
   $content.on("click", () => typeWriter.stop());
-});
-
-// 切换主题
-$(document).ready(function () {
-  $(".photo-head").on("click", function () {
-    const $mainPage = $("#main-page");
-    const $banner = $("#banner");
-    
-    if ($mainPage.hasClass("gold-theme")) {
-      $banner.addClass("hidden");
-      $mainPage.removeClass("gold-theme");
-    } else {
-      $banner.removeClass("hidden");
-      $mainPage.addClass("gold-theme");
-    }
-  });
 });
 
 // 设备检测
