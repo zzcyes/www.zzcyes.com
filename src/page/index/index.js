@@ -62,9 +62,10 @@ $(function () {
     type() {
       if (!this.isTyping || this.currentIndex >= this.text.length) {
         if (this.isTyping) {
-          const finalText = this.text.replace(/<br>/g, '<br><span class="cursor-wrapper">');
-          this.element.html(finalText + this.cursor.prop('outerHTML') + '</span>');
+          // 打字结束，显示完整文本，不添加光标
+          this.element.html(this.text);
           this.isTyping = false;
+          // 打字完成后滚动到底部
           setTimeout(() => {
             this.element[0].scrollTop = this.element[0].scrollHeight;
           }, 0);
@@ -97,8 +98,9 @@ $(function () {
 
     stop() {
       this.isTyping = false;
-      const finalText = this.text.replace(/<br>/g, '<br><span class="cursor-wrapper">');
-      this.element.html(finalText + this.cursor.prop('outerHTML') + '</span>');
+      // 立即显示所有文本，不添加光标
+      this.element.html(this.text);
+      // 立即滚动到底部
       setTimeout(() => {
         this.element[0].scrollTop = this.element[0].scrollHeight;
       }, 0);

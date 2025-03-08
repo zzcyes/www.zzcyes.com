@@ -62,11 +62,11 @@ main>.page-wrapper.gold-theme {
 main>.page-wrapper>.img-wrapper {
     position: absolute;
     top: -75px;
-    transition: all 0.7s ease-in-out;
-    -webkit-transition: all 0.7s ease-in-out;
-    -moz-transition: all 0.7s ease-in-out;
-    -ms-transition: all 0.7s ease-in-out;
-    -o-transition: all 0.7s ease-in-out;
+    width: 150px;
+    height: 150px;
+    perspective: 1000px;
+    z-index: 10;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 main>.page-wrapper>.img-wrapper>.photo-head {
@@ -76,45 +76,77 @@ main>.page-wrapper>.img-wrapper>.photo-head {
     height: 150px;
     border-radius: 50%;
     border: 4px solid rgba(178, 190, 195, 1);
-    opacity: 0.95;
-    animation: float 5s ease-in-out infinite;
-    -webkit-animation: float 5s ease-in-out infinite;
     background-image: url(../../assets/image/head-5.jpg);
     background-size: cover;
     background-position: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    animation: avatarFloat 6s ease-in-out infinite;
 }
 
 main>.page-wrapper.gold-theme>.img-wrapper>.photo-head {
     border: 4px solid rgba(253, 203, 110, 1);
+    background-image: url(../../assets/image/kobe.jpg);
+    box-shadow: 0 10px 30px rgba(253, 203, 110, 0.3);
 }
 
 main>.page-wrapper>.img-wrapper:hover {
-    transform: translate3d(50px, 50px, 120px) rotatey(180deg) scale3d(1.6, 1.6, 100);
-    -webkit-transform: translate3d(50px, 50px, 120px) rotatey(180deg) scale3d(1.6, 1.6, 100);
-    -moz-transform: translate3d(50px, 50px, 120px) rotatey(180deg) scale3d(1.6, 1.6, 100);
-    -ms-transform: translate3d(50px, 50px, 120px) rotatey(180deg) scale3d(1.6, 1.6, 100);
-    -o-transform: translate3d(50px, 50px, 120px) rotatey(180deg) scale3d(1.6, 1.6, 100);
+    transform: scale(1.05);
 }
 
-@keyframes float {
+main>.page-wrapper>.img-wrapper:hover>.photo-head {
+    transform: rotateY(20deg) rotateX(10deg);
+    box-shadow: -15px 15px 30px rgba(0, 0, 0, 0.4);
+    filter: brightness(1.1) contrast(1.1);
+}
+
+@keyframes avatarFloat {
     0% {
-        box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-        transform: translatey(0px);
-        -webkit-transform: translatey(0px);
-        -moz-transform: translatey(0px);
-        -ms-transform: translatey(0px);
-        -o-transform: translatey(0px);
+        transform: translateY(0) rotate(0deg);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
-
+    25% {
+        transform: translateY(-10px) rotate(2deg);
+    }
     50% {
-        box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
-        transform: translatey(-20px);
+        transform: translateY(-15px) rotate(0deg);
+        box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
     }
-
+    75% {
+        transform: translateY(-10px) rotate(-2deg);
+    }
     100% {
-        box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-        transform: translatey(0px);
+        transform: translateY(0) rotate(0deg);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
+}
+
+/* 添加点击效果 */
+main>.page-wrapper>.img-wrapper:active>.photo-head {
+    transform: scale(0.95) rotateY(0deg) rotateX(0deg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+/* 添加光晕效果 */
+main>.page-wrapper>.img-wrapper>.photo-head::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+main>.page-wrapper>.img-wrapper:hover>.photo-head::after {
+    opacity: 1;
 }
 
 .footer-nav {
@@ -353,7 +385,7 @@ main>.page-wrapper>.img-wrapper:hover {
 
 
 /* 自动打字 */
-
+/* Cabin+Condensed */
 #content {
     height: 60%;
     width: 90%;
@@ -361,6 +393,7 @@ main>.page-wrapper>.img-wrapper:hover {
     margin-top: 150px;
     overflow-x: hidden;
     cursor: pointer;
+    font-family: 'fontello';
 }
 
 #content::-webkit-scrollbar {
@@ -386,8 +419,7 @@ main>.page-wrapper>.img-wrapper:hover {
     display: block;
     margin: 0;
     color: hsla(0, 0%, 100%, .7);
-    font-family: Hind, Georgia, Tahoma, Sans-Serif;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 28px;
     white-space: pre-wrap;
 }
