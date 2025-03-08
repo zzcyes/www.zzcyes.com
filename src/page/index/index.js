@@ -1,4 +1,20 @@
 import "./index.css";
+
+const LOADING_DELAY_TIME = 500;
+const LOADING_FADE_OUT_TIME = LOADING_DELAY_TIME - 200;
+
+// 页面加载完成后处理
+$(window).on('load', function() {
+  // 添加一个小延迟，确保加载动画有足够的时间显示
+  setTimeout(function() {
+    // 隐藏加载动画，显示主内容
+    $(".loading").fadeOut(LOADING_FADE_OUT_TIME, function() {
+      $(this).css("display", "none");
+      $("#home-wrapper").css("display", "flex").addClass("home-wrapper");
+    });
+  }, LOADING_DELAY_TIME); // 1秒延迟
+});
+
 // 自动打字
 $(function () {
   const inputStr =
@@ -117,9 +133,6 @@ $(function () {
 
 // 切换主题
 $(document).ready(function () {
-  $("#home-wrapper").css("display", "flex").addClass("home-wrapper");
-  $(".loading").css("display", "none");
-  
   $(".photo-head").on("click", function () {
     const $mainPage = $("#main-page");
     const $banner = $("#banner");
