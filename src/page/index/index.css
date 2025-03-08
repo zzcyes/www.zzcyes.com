@@ -46,17 +46,24 @@ main>.page-wrapper {
     flex-direction: column;
     width: 90%;
     height: 60%;
-    background-color: rgba(83, 92, 104, 0.9);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
-    box-shadow: 8px 8px rgb(0 0 0 / 15%);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 main>.page-wrapper.gold-theme {
-    background-color: rgba(108, 92, 231, 0.9);
+    background: rgba(108, 92, 231, 0.2);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border: 1px solid rgba(108, 92, 231, 0.3);
+    box-shadow: 0 8px 32px rgba(108, 92, 231, 0.1);
 }
 
 main>.page-wrapper>.img-wrapper {
@@ -262,39 +269,81 @@ main>.page-wrapper>.img-wrapper:hover>.photo-head::after {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 300px;
+    height: 200px;
+    gap: 12px;
+    padding: 20px 0;
 }
 
 #contact-panel>.social-share-element:hover {
-    border-radius: 4px;
-    transition: 0.5s;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
+    border-radius: 12px;
 }
 
 .social-share-element {
     width: 50px;
     height: 50px;
-    transition: 0.5s;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     display: inline-block;
-    margin-right: 2px;
-    border-bottom: none;
-    border-radius: 50%;
-    background-color: rgba(45, 52, 54, 0.4);
-    background-size: 60%;
+    margin: 0 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background-size: 50%;
     background-position: center;
     background-repeat: no-repeat;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
 }
 
+.social-share-element:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.social-share-element:active {
+    transform: translateY(0);
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 为每个图标添加特定的悬停效果 */
+.social-share-element.social-kobe:hover {
+    border-color: rgba(253, 203, 110, 0.6);
+    box-shadow: 0 8px 24px rgba(253, 203, 110, 0.2);
+}
+
+.social-share-element.social-article:hover {
+    border-color: rgba(46, 204, 113, 0.6);
+    box-shadow: 0 8px 24px rgba(46, 204, 113, 0.2);
+}
+
+.social-share-element.social-github:hover {
+    border-color: rgba(155, 89, 182, 0.6);
+    box-shadow: 0 8px 24px rgba(155, 89, 182, 0.2);
+}
+
+.social-share-element.social-projects:hover {
+    border-color: rgba(52, 152, 219, 0.6);
+    box-shadow: 0 8px 24px rgba(52, 152, 219, 0.2);
+}
+
+.social-share-element.social-email:hover {
+    border-color: rgba(231, 76, 60, 0.6);
+    box-shadow: 0 8px 24px rgba(231, 76, 60, 0.2);
+}
+
+.social-share-element.social-guitar:hover {
+    border-color: rgba(241, 196, 15, 0.6);
+    box-shadow: 0 8px 24px rgba(241, 196, 15, 0.2);
+}
+
+/* 调整图标大小和背景图片 */
 .social-share-element.social-kobe {
     background-image: url(../../assets/image/icon-kobe.png);
-    background-size: 70%;
+    background-size: 60%;
 }
 
 .social-share-element.social-article {
@@ -304,36 +353,17 @@ main>.page-wrapper>.img-wrapper:hover>.photo-head::after {
 
 .social-share-element.social-github {
     background-image: url(../../assets/image/icon-github.png);
+    background-size: 55%;
 }
 
 .social-share-element.social-projects {
     background-image: url(../../assets/image/icon-projects.png);
-    /* background-size: 70%; */
-}
-
-
-.social-share-element.social-resume {
-    background-image: url(../../assets/image/icon-resume.png);
-    background-size: 70%;
+    background-size: 50%;
 }
 
 .social-share-element.social-email {
     background-image: url(../../assets/image/icon-email.png);
-}
-
-
-
-
-
-
-/* .social-share-element.social-contact {
-    background-image: url(../../assets/image/icon-contact.png);
-    background-size: 50%;
-} */
-
-.social-share-element.social-luck {
-    background-image: url(../../assets/image/icon-luck.png);
-    /* background-size: 50%; */
+    background-size: 45%;
 }
 
 .social-share-element.social-guitar {
@@ -341,10 +371,20 @@ main>.page-wrapper>.img-wrapper:hover>.photo-head::after {
     background-size: 45%;
 }
 
+.social-share-element.social-luck {
+    background-image: url(../../assets/image/icon-luck.png);
+    background-size: 50%;
+}
+
+/* 移除未使用的样式 */
+/* .social-share-element.social-contact {
+    background-image: url(../../assets/image/icon-contact.png);
+    background-size: 50%;
+} */
 
 /* .social-share-element.social-rain {
     background-image: url(../../assets/image/icon-rain.png);
-    background-size:60%;
+    background-size: 60%;
 } */
 
 .toggle-button-wrapper {
@@ -422,10 +462,11 @@ main>.page-wrapper>.img-wrapper:hover>.photo-head::after {
 #content p {
     display: block;
     margin: 0;
-    color: hsla(0, 0%, 100%, .7);
+    color: rgba(255, 255, 255, 0.9);
     font-size: 20px;
     line-height: 28px;
     white-space: pre-wrap;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 #content p.indent {
